@@ -14,16 +14,39 @@ A comprehensive full-stack application for detecting bias and ensuring fairness 
 
 ## 📋 Prerequisites
 
-- Python 3.8 or higher
-- Node.js 16 or higher
-- npm or yarn
+- Docker Desktop (recommended for the fastest start)
+- Optionally, Python 3.8+ and Node.js 16+ if you prefer running services without Docker
 
-## 🚀 Installation
+## 🚀 Run with Docker (Recommended)
+
+1. **Clone the repository**
+  ```bash
+  git clone https://github.com/aksharabhaskar/Bias-detection-in-recruitment-.git
+  cd Bias-detection-in-recruitment-
+  ```
+2. **Start all services**
+  ```bash
+  docker compose up --build
+  ```
+  This single command builds the backend, frontend, and PDF service images, then launches them on a shared network.
+3. **Open the dashboard** at [http://localhost](http://localhost).
+4. **Stop the stack** when finished:
+  ```bash
+  docker compose down
+  ```
+  Add `-v` if you want to clear uploaded datasets.
+
+Once running, uploads are stored in `backend/uploads` on the host so they persist between container restarts.
+
+## ⚙️ Manual Installation (Optional)
+
+If you prefer to run everything without Docker, follow the steps below.
 
 ### 1. Clone the Repository
 
 ```bash
-cd bias_detection
+git clone https://github.com/aksharabhaskar/Bias-detection-in-recruitment-.git
+cd Bias-detection-in-recruitment-
 ```
 
 ### 2. Backend Setup (FastAPI)
@@ -258,7 +281,7 @@ DELETE /api/dataset/{dataset_id}
 
 #### Generate PDF
 ```http
-POST /api/generate-pdf
+POST /pdf/generate-pdf
 Content-Type: application/json
 
 {
@@ -290,7 +313,7 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend.main:app
 
 #### Backend (.env)
 ```
-FASTAPI_HOST=localhost
+FASTAPI_HOST=0.0.0.0
 FASTAPI_PORT=8000
 UPLOAD_DIR=./uploads
 MAX_FILE_SIZE=10485760
@@ -299,14 +322,14 @@ CORS_ORIGINS=http://localhost:5173,http://localhost:3000
 
 #### PDF Service (.env)
 ```
-FLASK_HOST=localhost
-FLASK_PORT=8001
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5001
 ```
 
 #### Frontend (.env)
 ```
-VITE_API_URL=http://localhost:8000
-VITE_PDF_SERVICE_URL=http://localhost:8001
+VITE_API_URL=/api
+VITE_PDF_SERVICE_URL=/pdf
 ```
 
 ## 📝 Dataset Requirements
