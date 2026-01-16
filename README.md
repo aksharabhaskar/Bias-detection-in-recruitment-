@@ -1,23 +1,25 @@
 # AI Fairness Audit Dashboard
 
-A comprehensive full-stack application for detecting bias and ensuring fairness in AI recruitment systems. Built with React, FastAPI, and Flask, this dashboard provides 13 different fairness metrics with detailed visualizations and professional PDF reports.
+An open-source project that explores how to detect bias and reason about fairness in AI recruitment systems. Built with React, FastAPI, and Flask, the dashboard currently offers 13 fairness metrics with visual explanations and shareable PDF exports to guide experimentation and learning.
 
-## 🌟 Features
+## Features
 
-- **13 Fairness Metrics**: Comprehensive analysis including Demographic Parity, Disparate Impact, Equal Opportunity, and more
-- **Interactive Visualizations**: Charts and graphs using Recharts for easy interpretation
-- **Detailed Explanations**: Each metric includes definition, formula, interpretation, and recommendations
-- **PDF Report Generation**: Professional audit reports with ReportLab
-- **Modern UI**: Built with React, TypeScript, Tailwind CSS, and shadcn/ui components
-- **Protected Attribute Analysis**: Support for gender and age group analysis
-- **Auto Age Grouping**: Automatically generates age groups (20-30, 31-40, 41-50, 51-60) from age data
+- **13 Fairness Metrics**: Explore Demographic Parity, Disparate Impact, Equal Opportunity, and more as part of an evolving fairness toolkit
+- **Interactive Visualizations**: Prototype charts and graphs powered by Recharts for quick insight
+- **Detailed Explanations**: Living documentation with definitions, formulas, interpretations, and next-step ideas
+- **PDF Report Generation**: Generate shareable ReportLab summaries for project notes or stakeholder feedback
+- **Modern UI Experimentation**: Uses React, TypeScript, Tailwind CSS, and shadcn/ui components for a polished learning experience
+- **Protected Attribute Analysis**: Current support for gender and age group comparisons
+- **Auto Age Grouping**: Helper utility that derives age groups (20-30, 31-40, 41-50, 51-60) from raw age data
 
-## 📋 Prerequisites
+This project is still maturing. Expect active iteration, welcome rough edges, and feel free to experiment or contribute improvements.
+
+## Prerequisites
 
 - Docker Desktop (recommended for the fastest start)
 - Optionally, Python 3.8+ and Node.js 16+ if you prefer running services without Docker
 
-## 🚀 Run with Docker (Recommended)
+## Run with Docker (Recommended)
 
 1. **Clone the repository**
   ```bash
@@ -28,7 +30,7 @@ A comprehensive full-stack application for detecting bias and ensuring fairness 
   ```bash
   docker compose up --build
   ```
-  This single command builds the backend, frontend, and PDF service images, then launches them on a shared network.
+  This single command builds the backend, frontend, and PDF service images, then launches them on a shared network for a local project demo.
 3. **Open the dashboard** at [http://localhost](http://localhost).
 4. **Stop the stack** when finished:
   ```bash
@@ -36,11 +38,11 @@ A comprehensive full-stack application for detecting bias and ensuring fairness 
   ```
   Add `-v` if you want to clear uploaded datasets.
 
-Once running, uploads are stored in `backend/uploads` on the host so they persist between container restarts.
+Once running, uploads are stored in `backend/uploads` on the host so they persist between container restarts, making it easier to iterate on sample datasets.
 
-## ⚙️ Manual Installation (Optional)
+## Manual Installation (Optional)
 
-If you prefer to run everything without Docker, follow the steps below.
+If you prefer to run everything without Docker, use the steps below to set up your local development environment and explore the codebase.
 
 ### 1. Clone the Repository
 
@@ -97,7 +99,7 @@ cd frontend
 cp .env.example .env
 ```
 
-## 🏃 Running the Application
+## Running the Application
 
 You need to run three services simultaneously:
 
@@ -132,7 +134,7 @@ npm run dev
 
 The React app will start at `http://localhost:5173`
 
-## 📊 Using the Dashboard
+## Using the Dashboard
 
 ### 1. Upload Dataset
 
@@ -160,9 +162,9 @@ The React app will start at `http://localhost:5173`
 
 - Click "Export PDF Report" to generate a comprehensive audit document
 - PDF includes all metrics, visualizations, and recommendations
-- Professional format suitable for stakeholders and compliance
+- Draft format suitable for project reviews, retrospectives, or classroom walkthroughs
 
-## 📈 Fairness Metrics
+## Fairness Metrics
 
 ### 1. Demographic Parity
 Ensures equal selection rates across groups
@@ -203,7 +205,7 @@ Average of TPR and FPR differences
 ### 13. Theil Index
 Distribution inequality measure
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 bias_detection/
@@ -228,7 +230,7 @@ bias_detection/
 └── README.md                # This file
 ```
 
-## 🔌 API Documentation
+## API Documentation
 
 ### FastAPI Endpoints
 
@@ -295,9 +297,11 @@ Content-Type: application/json
 }
 ```
 
-## 🛠️ Development
+## Development
 
-### Building for Production
+### Building for Production Tests
+
+Use these commands when you want to create production-like artifacts for demos or comparative benchmarking.
 
 ```bash
 # Frontend
@@ -332,7 +336,7 @@ VITE_API_URL=/api
 VITE_PDF_SERVICE_URL=/pdf
 ```
 
-## 📝 Dataset Requirements
+## Dataset Requirements
 
 Your CSV file should include:
 
@@ -349,7 +353,7 @@ Your CSV file should include:
 - `predicted`: Predicted labels (0 or 1)
 - `score`: Confidence scores (0-100)
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Port Already in Use
 ```bash
@@ -374,19 +378,21 @@ npm install
 ### PDF Generation Fails
 Ensure matplotlib backend is set correctly (non-interactive) - already configured in `pdf_service/app.py`
 
-## 🔒 Security Considerations
+## Security Considerations
 
-- File size limits enforced (10MB default)
-- CSV validation before processing
-- Protected against common injection attacks
-- CORS configured for specific origins
-- No sensitive data persisted beyond session
+- Baseline file size limits enforced (10MB default)
+- CSV validation before processing to protect the demo environment
+- Basic safeguards against common injection attacks
+- CORS configured for specific origins during development
+- No sensitive data persisted beyond the session by design
 
-## 📄 License
+Hardening for production scenarios is outside the current scope and contributions are encouraged.
 
-This project is created for educational and auditing purposes.
+## License
 
-## 👥 Contributing
+This project is created for educational and auditing exploration.
+
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -395,14 +401,14 @@ Contributions are welcome! Please follow these steps:
 3. Make your changes
 4. Submit a pull request
 
-## 📞 Support
+## Support
 
 For issues, questions, or suggestions:
 - Check the troubleshooting section
 - Review API documentation
 - Open an issue on GitHub
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built with React, FastAPI, Flask, and modern web technologies
 - UI components from shadcn/ui
@@ -411,4 +417,4 @@ For issues, questions, or suggestions:
 
 ---
 
-**Note**: This dashboard is designed for fairness auditing and should be part of a comprehensive AI ethics and compliance program. Results should be reviewed by domain experts and legal counsel.
+**Note**: This project introduces fairness auditing concepts and should complement, not replace, expert-led governance, ethics review, and legal assessment.
